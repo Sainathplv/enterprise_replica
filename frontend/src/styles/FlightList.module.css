@@ -1,0 +1,27 @@
+.flightList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  
+  .flightCard {
+    border: 1px solid #ccc;
+    padding: 1rem;
+    width: 200px;
+    text-align: center;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+  }
+  
+  .flightCard h3 {
+    margin: 0;
+    font-size: 1.2rem;
+  }
+  
+  .flightCard p {
+    margin: 0.5rem 0 0;
+    color: #555;
+  }
+  
