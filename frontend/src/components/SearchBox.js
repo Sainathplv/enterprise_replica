@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React from "react";
 import styles from "../styles/SearchBox.module.css";
 
-const SearchBox = () => {
-  const [departure, setDeparture] = useState("");
-  const [destination, setDestination] = useState("");
-
-  const handleSearch = () => {
-    console.log(`Searching for flights from ${departure} to ${destination}`);
-  };
-
+const SearchSection = () => {
   return (
-    <div className={styles.searchBox}>
-      <input
-        type="text"
-        placeholder="From"
-        value={departure}
-        onChange={(e) => setDeparture(e.target.value)}
-      />
-      <input
-        type="text"
-        placeholder="To"
-        value={destination}
-        onChange={(e) => setDestination(e.target.value)}
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className={styles.searchSection}>
+      <h1>Travel Information</h1>
+      {/* Search Bar */}
+      <div className={styles.searchBar}>
+        <i className="bi bi-search"></i>
+        <input type="text" placeholder="Search for flights, hotels, and more" />
+      </div>
+
+      {/* Icons Section */}
+      <div className={styles.iconRow}>
+        <div className={styles.iconItem}>
+          <i className="bi bi-binoculars" ></i>
+          <span>Explore</span>
+        </div>
+        <div className={styles.iconItem}>
+          <i className="bi bi-airplane"></i>
+          <span>Flights</span>
+        </div>
+        <div className={styles.iconItem}>
+          <i className="bi bi-building"></i>
+          <span>Hotels</span>
+        </div>
+        <div className={styles.iconItem}>
+          <i className="bi bi-house-door"></i>
+          <span>Vacation rentals</span>
+        </div>
+      </div>
     </div>
   );
 };
 
-export default SearchBox;
+export default SearchSection;

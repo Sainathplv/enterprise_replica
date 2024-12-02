@@ -14,7 +14,10 @@ const Navbar = () => {
           <i className="bi bi-building" /> Hotels
         </Link>
         <Link to="/vacations">
-          <i className="bi bi-beach" /> Vacations
+          <i className="bi bi-backpack2" /> Vacations
+        </Link>
+        <Link to="/TBlog">
+          <i className="bi bi-bookmark-heart" /> TBlog
         </Link>
         <Link to="/login">
           <i className="bi bi-person" /> Login
