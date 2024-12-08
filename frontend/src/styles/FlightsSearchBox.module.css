@@ -1,11 +1,10 @@
-.searchBox {
+/* .searchBox {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: absolute;
     top: 55%;
-    /* Overlaps slightly below the image */
     left: 50%;
     transform: translate(-50%, 50%);
     width: 90%;
@@ -15,7 +14,7 @@
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.15);
     padding: 2rem;
     z-index: 10;
-}
+} */
 
 .tripType {
     display: flex;

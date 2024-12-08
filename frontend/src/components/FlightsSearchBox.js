@@ -1,14 +1,26 @@
 import React, { useState } from "react";
 import styles from "../styles/FlightsSearchBox.module.css";
-import "bootstrap-icons/font/bootstrap-icons.css";
 
-const FlightsSearchBox = () => {
+const FlightsSearchBox = ({ onSearch }) => {
   const [tripType, setTripType] = useState("one-way");
   const [from, setFrom] = useState("");
   const [to, setTo] = useState("");
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [passengers, setPassengers] = useState(1);
+
+  const handleSearchClick = () => {
+    // Pass search parameters to the parent component
+    const searchParams = {
+      from,
+      to,
+      departureDate,
+      returnDate: tripType === "round-trip" ? returnDate : undefined,
+      tripType,
+      passengers,
+    };
+    onSearch(searchParams);
+  };
 
   return (
     <div className={styles.searchBox}>
@@ -69,9 +81,7 @@ const FlightsSearchBox = () => {
           </div>
         )}
         <div className={styles.labeledField}>
-          <label htmlFor="passengers">
-            <i className="bi bi-people" /> Passengers
-          </label>
+          <label htmlFor="passengers">Passengers</label>
           <input
             id="passengers"
             type="number"
@@ -83,7 +93,9 @@ const FlightsSearchBox = () => {
       </div>
 
       {/* Search Button */}
-      <button className={styles.searchButton}>Search Flights</button>
+      <button className={styles.searchButton} onClick={handleSearchClick}>
+        Search Flights
+      </button>
     </div>
   );
 };

@@ -1,0 +1,76 @@
+.flightCard {
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.flightCard:hover {
+    transform: scale(1.02);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.airline {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.airline img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+}
+
+.details {
+    flex-grow: 1;
+    text-align: center;
+    padding: 10px;
+    color: #333;
+}
+
+.details p {
+    margin: 2px 0;
+}
+
+.price {
+    text-align: center;
+    font-weight: bold;
+    color: #007bff;
+}
+
+.price p:first-child {
+    font-size: 1.2rem;
+}
+
+.expandButton {
+    background: none;
+    border: none;
+    color: #007bff;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
+.expandedDetails {
+    margin-top: 10px;
+    border-top: 1px solid #ddd;
+    padding-top: 10px;
+}
+
+.segment {
+    background: #f9f9f9;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
