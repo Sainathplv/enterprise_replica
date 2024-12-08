@@ -57,6 +57,10 @@ const HomePage = () => {
       </div>
       {/* <FlightList flights={flights} /> */}
 
+      <div className={styles.searchSectionContainer}>
+        <SearchBox />
+      </div>
+
       {/* Features Scrollable Container */}
       <div className={styles.featuresScrollableContainer}>
         {features.map((feature, index) => (
@@ -128,9 +132,6 @@ const HomePage = () => {
         </div>
       </div>
       {/* Search Section Container */}
-      <div className={styles.searchSectionContainer}>
-        <SearchBox />
-      </div>
     </div>
   );
 };

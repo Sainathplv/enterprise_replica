@@ -5,7 +5,7 @@ import styles from "../styles/Navbar.module.css";
 const Navbar = () => {
   return (
     <nav className={styles.navbar}>
-      <h1 className={styles.logo}>Flight Finder</h1>
+      <h1 className={styles.logo}>Travel Finder</h1>
       <div className={styles.links}>
         <Link to="/flights">
           <i className="bi bi-airplane" /> Flights
