@@ -41,11 +41,6 @@ const HotelsPage = () => {
 
       {/* Hero Section */}
       <div className={styles.heroContainer}>
-        <img
-          src={require("../images/1920.jpg")}
-          alt="Hero"
-          className={styles.heroImage}
-        />
         <div className={styles.heroText}>
           <h1>Find Your Perfect STAY</h1>
           <p>Search, compare, and book hotels with ease.</p>
