@@ -3,11 +3,11 @@ const axios = require("axios");
 // Controller function to fetch flight data
 const getHotels = async (req, res) => {
   try {
-    const { departureDate, returnDate, passengers } = req.query;
+    const { location, check_in_date, check_out_date, guests } = req.query;
 
     // Validate required fields
-    if (!location || !check_in_date || !check_in_date) {
-      return res.status(400).json({ error: "Missing required fields: 'from', 'to', 'departureDate'" });
+    if (!location || !check_in_date || !check_out_date) {
+      return res.status(400).json({ error: "Missing required fields: 'location', 'check in date', check out date'" });
     }
 
     // Construct API request
@@ -16,11 +16,11 @@ const getHotels = async (req, res) => {
       engine: "google_hotels",
       q: location, // location
       check_in_date: check_in_date,
-      check_in_date: check_in_date,
-      adults: occupants || 1,
+      check_out_date: check_out_date,
+      adults: guests || 1,
       currency: "USD",
       gl: "us",
-      hl: "en",
+      hl: "el",
       api_key: process.env.API_KEY
     };
 

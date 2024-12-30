@@ -1,5 +1,5 @@
 const express = require("express");
-const { getFlights } = require("../controllers/hotelsController");
+const { getHotels } = require("../controllers/hotelsController");
 const router = express.Router();
 
 // Route to handle flight search

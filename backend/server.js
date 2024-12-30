@@ -1,6 +1,7 @@
 const cors = require("cors");
 const express = require("express");
 const flightsRouter = require("./routes/flights");
+const hotelsRouter  = require("./routes/hotels")
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/flights", flightsRouter);
+app.use("/api/hotels", hotelsRouter)
 
 // Server listening
 const PORT = process.env.PORT || 5000;
