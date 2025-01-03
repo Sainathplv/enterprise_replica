@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styles from "../styles/FlightCard.module.css";
 
-const FlightCard = ({ flight }) => {
+const FlightCard = ({ flight, onSelect }) => {
   const { flights, price, airline_logo, type } = flight;
   const [isExpanded, setIsExpanded] = useState(false);
 
@@ -55,6 +55,12 @@ const FlightCard = ({ flight }) => {
               </p>
             </div>
           ))}
+          <button
+            className={styles.selectButton}
+            onClick={() => onSelect(flight)}
+          >
+            Select This Flight
+          </button>
         </div>
       )}
     </div>
