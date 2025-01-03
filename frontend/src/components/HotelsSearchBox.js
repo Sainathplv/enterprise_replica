@@ -1,26 +1,39 @@
 import React, { useState } from "react";
 import styles from "../styles/FlightsSearchBox.module.css";
 
-const HotelsSearchBox = ({ onSearch }) => {
+const HotelsSearchBox = ({ onSearchResults }) => {
   const [location, setLocation] = useState("");
   const [check_in_date, setCheck_in_date] = useState("");
   const [check_out_date, setCheck_out_date] = useState("");
   const [guests, setGuests] = useState(1);
 
-  const handleSearchClick = () => {
-    // Pass search parameters to the parent component
-    const searchParams = {
-      location,
-      check_in_date,
-      check_out_date,
-      guests,
-    };
-    onSearch(searchParams);
+  const handleSearchClick = async () => {
+    try {
+      // Construct API URL with query parameters
+      const apiUrl = `http://localhost:5001/api/hotels?location=${location.replace(
+        / /g,
+        "+"
+      )}+Resorts&check_in_date=${check_in_date}&check_out_date=${check_out_date}&guests=${guests}`;
+
+      // Fetch data from the backend
+      const response = await fetch(apiUrl);
+      const data = await response.json();
+
+      if (response.ok) {
+        // Pass only the properties array to the parent component
+        onSearchResults(data.properties || []);
+      } else {
+        console.error("Error fetching hotels:", data.error);
+        onSearchResults([]);
+      }
+    } catch (error) {
+      console.error("Error fetching hotels:", error);
+      onSearchResults([]);
+    }
   };
 
   return (
-    <div className={styles.searchBox}>  
-      {/* Input Fields */}
+    <div className={styles.searchBox}>
       <div className={styles.inputFields}>
         <input
           type="text"
@@ -29,14 +42,14 @@ const HotelsSearchBox = ({ onSearch }) => {
           onChange={(e) => setLocation(e.target.value)}
         />
         <div className={styles.labeledField}>
-          <label htmlFor="check_in_date">Check In Date</label>
+          <label htmlFor="check_in_date">Check-In Date</label>
           <input
             id="check_in_date"
             type="date"
             value={check_in_date}
             onChange={(e) => setCheck_in_date(e.target.value)}
           />
-                </div>
+        </div>
         <div className={styles.labeledField}>
           <label htmlFor="check_out_date">Check-Out Date</label>
           <input
@@ -57,8 +70,6 @@ const HotelsSearchBox = ({ onSearch }) => {
           />
         </div>
       </div>
-
-      {/* Search Button */}
       <button className={styles.searchButton} onClick={handleSearchClick}>
         Search Hotels
       </button>
