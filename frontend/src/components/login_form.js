@@ -1,41 +1,46 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "../styles/LoginForm.module.css"; // Import modular CSS
+import { useAuth } from "../context/AuthContext";
 
 const LoginForm = ({ onLogin }) => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError("");
 
     // Basic validation
-    if (!username || !password) {
+    if (!email || !password) {
       setError("Please fill out all fields.");
       return;
     }
 
     try {
       // Replace with actual API endpoint
-      const response = await fetch("/api/login", {
+      const response = await fetch("http://localhost:5001/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({ email, password }),
       });
 
       const result = await response.json();
 
       if (response.ok) {
         // Pass login data to parent (e.g., LoginPage)
-        onLogin(result.data);
-        navigate(`/dashboard/${result.data.userid}`);
+        const user = result.user;
+        onLogin(user);
+        login(user);
+        console.log("Login successful:", user);
+        navigate(`/?user_id=${user.user_id}`);
       } else {
-        setError(result.message || "Incorrect username or password.");
+        setError(result.message || "Incorrect email or password.");
       }
     } catch (err) {
       console.error("Login error:", err);
@@ -50,9 +55,9 @@ const LoginForm = ({ onLogin }) => {
       <form onSubmit={handleSubmit}>
         <input
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          placeholder="Username"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="email"
           className={styles.inputField}
           required
         />

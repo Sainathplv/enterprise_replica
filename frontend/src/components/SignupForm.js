@@ -41,19 +41,19 @@ const SignupForm = () => {
     }
 
     try {
-      // Replace with your actual API endpoint
-      const response = await fetch("/api/signup", {
+      // Call the backend API for registration
+      const response = await fetch("http://localhost:5001/api/users/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           email,
-          firstName,
-          lastName,
+          first_name: firstName,
+          last_name: lastName,
           gender,
-          dateOfBirth,
-          phoneNumber,
+          date_of_birth: dateOfBirth,
+          phone_number: phoneNumber,
           password,
         }),
       });
@@ -61,13 +61,15 @@ const SignupForm = () => {
       const result = await response.json();
 
       if (response.ok) {
-        setSuccess("Signup successful! Redirecting to login...");
-        setTimeout(() => navigate("/login"), 3000); // Redirect to login page after 3 seconds
+        setSuccess("Registration successful! Redirecting to login...");
+        setTimeout(() => {
+          navigate("/login");
+        }, 3000); // Redirect to login after 3 seconds
       } else {
-        setError(result.message || "Signup failed. Please try again.");
+        setError(result.message || "Registration failed. Please try again.");
       }
     } catch (err) {
-      console.error("Signup error:", err);
+      console.error("Registration error:", err);
       setError("An error occurred. Please try again later.");
     }
   };
@@ -155,7 +157,7 @@ const SignupForm = () => {
         <Link to="/login" className={styles.link}>
           Login
         </Link>
-        <br></br>
+        <br />
         <Link to="/" className={styles.link}>
           Back to Homepage
         </Link>
