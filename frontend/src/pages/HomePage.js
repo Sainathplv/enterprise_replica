@@ -1,24 +1,40 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom"; // Import useLocation
 import styles from "../styles/HomePage.module.css";
 import SearchBox from "../components/SearchBox";
 import Navbar from "../components/Navbar";
+import { useAuth } from "../context/AuthContext"; // Import AuthContext
 
 const HomePage = () => {
-  const [flights, setFlights] = useState([]); // Placeholder state for flights
+  const [userId, setUserId] = useState(null); // State for user_id
+  const { authState } = useAuth(); // Access global auth state
+  const location = useLocation(); // Access the location object
+
+  useEffect(() => {
+    // Extract user_id from query parameters or AuthContext
+    const params = new URLSearchParams(location.search);
+    const userIdFromQuery = params.get("user_id");
+
+    // Update user_id state
+    if (userIdFromQuery) {
+      setUserId(userIdFromQuery);
+    } else if (authState.isAuthenticated) {
+      setUserId(authState.user.user_id); // Use AuthContext if available
+    }
+  }, [location, authState]);
+
   const features = [
     {
       title: "Personalized Recommendations",
       description:
         "Get tailored suggestions based on your preferences and past searches. Let us help you find the perfect flights, hotels, or vacation packages.",
       image: require("../images/recom.jpg"),
-
     },
     {
       title: "Price Comparison",
       description:
         "Compare prices across multiple providers to ensure you always get the best deal.",
       image: require("../images/Stock.jpg"),
-
     },
     {
       title: "Interactive Map",
@@ -27,10 +43,6 @@ const HomePage = () => {
       image: require("../images/maps.png"),
     },
   ];
-  // Placeholder for API call
-  useEffect(() => {
-    console.log("API call placeholder");
-  }, []);
 
   return (
     <div className={styles.homePage}>
@@ -51,11 +63,12 @@ const HomePage = () => {
         <div className={styles.heroText}>
           <h1>Find Your Perfect Travel Plan</h1>
           <p>
-            Search, compare, and book your travel seamlessly. Start your journey today!
+            {userId
+              ? `Welcome User #${userId}, start planning your next adventure!`
+              : "Search, compare, and book your travel seamlessly. Start your journey today!"}
           </p>
         </div>
       </div>
-      {/* <FlightList flights={flights} /> */}
 
       <div className={styles.searchSectionContainer}>
         <SearchBox />
@@ -131,7 +144,6 @@ const HomePage = () => {
           </div>
         </div>
       </div>
-      {/* Search Section Container */}
     </div>
   );
 };

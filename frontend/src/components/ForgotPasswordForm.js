@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import styles from "../styles/ForgotPasswordForm.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
+
+const BASE_URL_API = "http://localhost:5001/api"; // Backend base URL
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState("");
@@ -19,25 +22,18 @@ const ForgotPasswordForm = () => {
     }
 
     try {
-      // Replace with your actual API endpoint
-      const response = await fetch("/api/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email }),
-      });
+      // Make the API call using axios
+      const response = await axios.post(`${BASE_URL_API}/forgot-password`, { email });
 
-      const result = await response.json();
-
-      if (response.ok) {
-        setMessage(result.message || "Password reset email sent successfully.");
+      // Axios already parses the response into JSON
+      if (response.status === 200) {
+        setMessage(response.data.message || "Password reset email sent successfully.");
       } else {
-        setError(result.message || "Failed to send password reset email.");
+        setError(response.data.message || "Failed to send password reset email.");
       }
     } catch (err) {
       console.error("Error:", err);
-      setError("An error occurred. Please try again later.");
+      setError(err.response?.data?.message || "An error occurred. Please try again later.");
     }
   };
 
