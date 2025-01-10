@@ -3,6 +3,7 @@ const express = require("express");
 const flightsRouter = require("./routes/flights");
 const userRoutes = require("./routes/userRoutes");
 const forgotPasswordRoutes = require("./routes/forgotPasswordRoutes");
+const hotelsRouter  = require("./routes/hotels")
 require("dotenv").config();
 
 const app = express();
@@ -15,6 +16,7 @@ app.use(express.json());
 app.use("/api/flights", flightsRouter);
 app.use("/api/users", userRoutes);
 app.use("/api/forgot-password", forgotPasswordRoutes);
+app.use("/api/hotels", hotelsRouter)
 
 // Register Test Route (for quick testing, can be removed later)
 app.post("/api/users/register", (req, res) => {
@@ -25,6 +27,7 @@ app.post("/api/users/register", (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found." });
 });
+
 
 // Server listening
 const PORT = process.env.PORT || 5001;
