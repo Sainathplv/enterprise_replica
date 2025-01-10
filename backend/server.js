@@ -16,6 +16,7 @@ app.use(express.json());
 app.use("/api/flights", flightsRouter);
 app.use("/api/users", userRoutes);
 app.use("/api/forgot-password", forgotPasswordRoutes);
+app.use("/api/hotels", hotelsRouter)
 
 // Register Test Route (for quick testing, can be removed later)
 app.post("/api/users/register", (req, res) => {
@@ -26,7 +27,7 @@ app.post("/api/users/register", (req, res) => {
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found." });
 });
-app.use("/api/hotels", hotelsRouter)
+
 
 // Server listening
 const PORT = process.env.PORT || 5001;
