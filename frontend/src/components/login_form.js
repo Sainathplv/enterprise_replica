@@ -21,7 +21,6 @@ const LoginForm = ({ onLogin }) => {
     }
 
     try {
-      // Replace with actual API endpoint
       const response = await fetch("http://localhost:5001/api/users/login", {
         method: "POST",
         headers: {
